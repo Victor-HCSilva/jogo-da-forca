@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo da forca</title>
+    <style>
+        body{
+            background-color: rgb(201, 201, 201);
+        }
+        #btn_reset{
+            display: none;
+            border-radius: 6px;
+        }
+        #btn, #btn_reset{
+            background-color: rgb(0,100,200);
+            color: white;
+        }
+        #btn:hover, #btn_reset:hover{
+            transition: 0.5s;
+            background-color: white;
+            color: rgb(0,100,200);
+        }
+        .main{
+            border-radius: 10px ;
+            padding: 50px;
+            text-align: center;
+            background-color: rgb(124, 115, 103);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            position: absolute;
+        }
+        input{
+            border-radius: 6px;
+        }
+        #menssagem{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="main">
+        <div class="spans">
+            <strong><span id="erros"></span></strong>
+        <br>
+        <strong><span id="palavra"></span></strong>
+        <br>
+        <span id="menssagem"></span>
+        <br>
+        </div>
+        <form>
+            <div>
+                <input id="chute" type="text">
+                <br>
+            <input type="submit" value="Tentar" id="btn">
+            </div>
+            
+        </form>
+        
+        <div class="btn">
+            <button id="btn_reset">Resetar</button>
+        </div>
+        
+        
+    </div>
+    
+    <script src="./main.js" defer></script>
+</body>
+</html>
