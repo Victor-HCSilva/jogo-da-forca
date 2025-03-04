@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let acertou: boolean = false;//flag para perder chances
 
         for(i = 0; i < size; i++ ){
-            if(palavra_aleatoria.split("")[i] == chuteValue){
+            if(palavra_aleatoria.split("")[i].toUpperCase() == chuteValue.toUpperCase()){
                 palavra_escondida[i] = chuteValue;//.toUpperCase();
                 acertou = true;
             }
@@ -146,9 +146,9 @@ document.addEventListener("DOMContentLoaded", () => {
             " tentativa(s) a palavra <strong>"+palavra_aleatoria.toUpperCase():"<strong/>Fim de jogo a palavra era: "+palavra_aleatoria.toUpperCase();
 
             if(venceu){
-                menssagem.style.color = "green";
+                menssagem.style.color = "white";
             } else {
-                menssagem.style.color = "red";
+                menssagem.style.color = "darkred";
             }
             menssagem.innerHTML = mensagem;
         }

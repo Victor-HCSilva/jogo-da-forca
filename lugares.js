@@ -79,7 +79,6 @@ document.addEventListener("DOMContentLoaded", function () {
   "Kilimanjaro"
 ];
 
-console.log(lugares);
    var indice = numeroAleatorioEntre(0, lugares.length - 1);
     var palavra_aleatoria = lugares[indice]; //-> manga
     var palavra_escondida = esconde_palavra(palavra_aleatoria).split("");

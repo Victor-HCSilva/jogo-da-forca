@@ -30,7 +30,7 @@
 @media (min-width: 1025px) {
     *{
        
-       font-size:2rem; 
+       font-size:1.4rem; 
         margin :0;
         font-family: "Comfortaa", sans-serif;
         font-optical-sizing: auto;
@@ -72,7 +72,7 @@ input{
     border-radius: 6px;
 }
 #menssagem{
-    color: red;
+    color: darkred;
 }
  .main > a{
     text-decoration: none;
