@@ -1,6 +1,3 @@
-///Se for adicionar a mecanica de escolha do  tema é necessario criar um menu com as escolhas
-//possiveis
-//
 const body:HTMLBodyElement = document.querySelector("body") || null;
 const palavra: HTMLSpanElement = document.querySelector("#palavra") || null;
 const menssagem: HTMLSpanElement = document.querySelector("#menssagem") || null;
@@ -10,7 +7,6 @@ const chute: HTMLInputElement = document.querySelector("#chute");
 const erros_label: HTMLSpanElement = document.querySelector("#erros");
 const tema:HTMLSpanElement = document.querySelector("#tema");
 const errou_palavra_label:HTMLSpanElement = document.querySelector("#errou_palavra");
-
 
 document.addEventListener("DOMContentLoaded", () => {
     function esconde_palavra(palavra:string): string{
@@ -99,7 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
         event.preventDefault();
 
         const chuteValue:string = chute.value;
-        let acertou: boolean = false;//flag para perder chances
+        let acertou: boolean = false;//flag de vitoria
 
         for(i = 0; i < size; i++ ){
             if(palavra_aleatoria.split("")[i].toUpperCase() == chuteValue.toUpperCase()){
