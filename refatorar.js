@@ -61,7 +61,7 @@ var HangMan = /** @class */ (function () {
     HangMan.prototype.addErro = function (e) {
         this.erros.push(e);
     };
-    //Retirar chances, o tamnho do chute determina se o jogador tentou 
+    //Retirar chances, o tamanho do chute determina se o jogador tentou 
     //chutar de vez a palavra
     HangMan.prototype.DiminuirChances = function (flag, chute) {
         //verifica se houve erro, se não nao retira pontos
@@ -81,17 +81,6 @@ var HangMan = /** @class */ (function () {
     return HangMan;
 }());
 document.addEventListener("DOMContentLoaded", function () {
-    // RESETAR O JOGO
-    btn_reset.addEventListener("click", function () {
-        var indice = utils.randomIndice(0, frutas.length - 1);
-        var palavra_aleatoria = frutas[indice].toUpperCase();
-        var hangman = new HangMan(palavra_aleatoria);
-        var erros = hangman.getErros();
-        var palavra_escondida = hangman.hide();
-        btn_reset.style.display = "none";
-        var venceu = palavra_escondida.join("") === palavra_aleatoria;
-        hangman.resetChances(palavra_aleatoria.length); //atibuindo mais chances
-    });
     //Funcoes uteis
     var utils = new Utils();
     var frutas = [
@@ -150,15 +139,16 @@ document.addEventListener("DOMContentLoaded", function () {
                 esta = true;
             }
         }
-        console.log("chute:", valor_chute, "Chances:", hangman.getChances());
-        console.log("Palavra escondida:", palavra_escondida.join(","));
-        console.log("condicao; ", palavra_aleatoria === palavra_escondida.join(""));
+        //console.log("chute:", valor_chute, "Chances:", hangman.getChances());
+        //console.log("Palavra escondida:", palavra_escondida.join(","),"palavra:", palavra_aleatoria);
+        //console.log("condicao; ", palavra_aleatoria === palavra_escondida.join(""))
         //diminuindo chances caso tenha errado
         hangman.DiminuirChances(esta, valor_chute);
         //Se errou o chute, a letra errada é armazenada para ser exibida
         if (!(utils.contains(valor_chute, hangman.getErros())) && esta === false) {
             hangman.addErro(valor_chute);
         }
+        //Vitoria/derrota/status
         if (venceu === true) {
             menssagem.style.color = "white";
             menssagem.innerHTML = "Parab\u00E9ns Acertou a palavra ".concat(palavra_aleatoria, "!!!");
@@ -172,11 +162,23 @@ document.addEventListener("DOMContentLoaded", function () {
             menssagem.style.color = "black";
             menssagem.innerHTML = "Perdeu, a palavra era ".concat(palavra_aleatoria);
         }
-        //Deicando o botão invisivel
+        //Deixando o botão invisivel
         if (venceu === true || hangman.getChances() <= 0) {
             btn_reset.style.display = "inline";
         }
         //Removendo o valor digitado:
         chute.value = "";
+        // RESETAR O JOGO
+        btn_reset.addEventListener("click", function () {
+            indice = utils.randomIndice(0, frutas.length - 1);
+            palavra_aleatoria = frutas[indice].toUpperCase();
+            hangman = new HangMan(palavra_aleatoria);
+            erros = hangman.getErros();
+            palavra_escondida = hangman.hide();
+            btn_reset.style.display = "none";
+            venceu = palavra_escondida.join("") === palavra_aleatoria;
+            hangman.resetChances(palavra_aleatoria.length); //atibuindo mais chances
+            menssagem.innerHTML = "";
+        });
     });
 });
