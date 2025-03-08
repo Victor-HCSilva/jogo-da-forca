@@ -8,7 +8,8 @@ const erros_label: HTMLSpanElement = document.querySelector("#erros") || null;
 const tema:HTMLSpanElement = document.querySelector("#tema") || null;
 const errou_palavra_label:HTMLSpanElement = document.querySelector("#errou_palavra") || null;
 
-
+//O botão de resete so fica visivel quando temrmina o jogo
+btn_reset.style.display = "none";
 class Utils{
 
     //retorna um numero aleatório em um intervalo dado
@@ -82,7 +83,12 @@ class HangMan {
         }
        
     }
-    //Faz a lógica de preenchimento das letras, a letra e palavra devem estar em caps
+    //reset
+    resetChances(size: number){
+        this.chances = size + 4;
+    }
+
+        //Faz a lógica de preenchimento das letras, a letra e palavra devem estar em caps
    }
 
 
@@ -125,48 +131,89 @@ document.addEventListener("DOMContentLoaded", () => {
     ];
 
     
+    let indice = utils.randomIndice(0, frutas.length - 1);
+    let palavra_aleatoria = frutas[indice].toUpperCase(); 
+    let hangman = new HangMan(palavra_aleatoria);
+    let erros = hangman.getErros()
+    let palavra_escondida: Array<string> = hangman.hide()
 
     btn.addEventListener("click", (event) => {
 
         event.preventDefault() 
 
-        let indice = utils.randomIndice(0, frutas.length - 1);
-        let palavra_aleatoria = frutas[indice].toUpperCase(); 
-        let hangman = new HangMan(palavra_aleatoria);
         //flag para ver se a letra está na palavra
         let esta = false;
         //um array de caracteres
-        let palavra_escondida: Array<string> = hangman.hide()
-        let venceu = false;
-        let valor_chute: string = chute.value
-        //Se escrever a palavra toda e acertar
-        
+        let venceu = palavra_escondida.join("") === palavra_aleatoria;
+        let valor_chute: string = chute.value.toUpperCase();
+
+        //Se escrever a palavra toda e acertar        
         if(utils.equal(valor_chute, palavra_aleatoria)){
-            venceu = true
+            venceu = true;
         }
-        console.log("chute:", valor_chute)
-        console.log("Palavra da vez:", palavra_aleatoria)
-        //Preenchendo
+            //Preenchendo
         for(let i = 0; i < palavra_aleatoria.length; i++ ){
             if(palavra_aleatoria[i] == valor_chute){
                 palavra_escondida[i] = valor_chute;
                 esta = true;
             }
         }
+        console.log("chute:", valor_chute, "Chances:", hangman.getChances());
+        console.log("Palavra escondida:", palavra_escondida.join(","));
+        console.log("condicao; ", palavra_aleatoria === palavra_escondida.join(""))
 
         //diminuindo chances caso tenha errado
        hangman.DiminuirChances(esta, valor_chute);
 
-       //Se errou o chute, a letra errada é armazenada
+       //Se errou o chute, a letra errada é armazenada para ser exibida
        if(!(utils.contains(valor_chute, hangman.getErros())) && esta === false){
             hangman.addErro(valor_chute);
        }
-
+        
         if(venceu === true){
-            menssagem.innerHTML = `Acertou a palavra ${palavra_aleatoria}!!!`
-        } else {
-            menssagem.innerHTML = `Palavra: ${palavra_escondida} - chances restantes: ${hangman.getChances()}` 
+            menssagem.style.color= "white";
+            menssagem.innerHTML = `Parabéns Acertou a palavra ${palavra_aleatoria}!!!`;
+
+        } else if(hangman.getChances() > 0 &&  venceu === false) {
+
+            menssagem.style.color= "darkred";
+            menssagem.innerHTML = 
+            `Erros: ${erros.join(" - ")}
+           <br> 
+            Chances: ${hangman.getChances()}
+           <br> 
+            Palavra: ${palavra_escondida.join(" ")} `
+
+        } else if(hangman.getChances() <= 0){
+            menssagem.style.color= "black";
+            menssagem.innerHTML = `Perdeu, a palavra era ${palavra_aleatoria}`;
+       
         }
+        //Deicando o botão invisivel
+        if (venceu === true || hangman.getChances() <=0 ){
+            btn_reset.style.display = "inline";
+
+        }  
+       
+        //Removendo o valor digitado:
+        chute.value="";
+
+//----------tentando resetar o numero de chances
+
+    // RESETAR O JOGO
+    btn_reset.addEventListener("click", () => {
+        
+        hangman.resetChances(palavra_aleatoria.length) //atibuindo mais chances
+        let indice = utils.randomIndice(0, frutas.length - 1);
+        let palavra_aleatoria = frutas[indice].toUpperCase(); 
+        let hangman = new HangMan(palavra_aleatoria);
+        let erros = hangman.getErros();
+        let palavra_escondida: Array<string> = hangman.hide();
+        btn_reset.style.display = "none";
+        let venceu = palavra_escondida.join("") === palavra_aleatoria;
+    })
+
 
     });
+
 });
