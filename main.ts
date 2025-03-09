@@ -122,6 +122,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             }
         }
+
         // Se o jogador tentou uma palavra mas errou!
         if (chuteValue.length > 1 && chuteValue != palavra_aleatoria){
             chances-=1;

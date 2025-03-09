@@ -1,12 +1,9 @@
-var body = document.querySelector("body") || null;
 var palavra = document.querySelector("#palavra") || null;
 var menssagem = document.querySelector("#menssagem") || null;
 var btn = document.querySelector("#btn");
 var btn_reset = document.querySelector("#btn_reset") || null;
 var chute = document.querySelector("#chute") || null;
-var erros_label = document.querySelector("#erros") || null;
-var tema = document.querySelector("#tema") || null;
-var errou_palavra_label = document.querySelector("#errou_palavra") || null;
+var hangman_label = document.querySelector("#hangman") || null;
 //O botão de resete so fica visivel quando temrmina o jogo
 btn_reset.style.display = "none";
 var Utils = /** @class */ (function () {
@@ -83,6 +80,16 @@ var HangMan = /** @class */ (function () {
 document.addEventListener("DOMContentLoaded", function () {
     //Funcoes uteis
     var utils = new Utils();
+    //adicionar
+    var forcaDesenhos = [
+        "\n          ______\n        |      |\n        |\n        |\n        |\n        |________\n        ",
+        "\n         ______\n        |      |\n        |      O\n        |\n        |\n        |________\n        ",
+        "\n         ______\n        |      |\n        |      O\n        |      |\n        |\n        |________\n        ",
+        "\n         ______\n        |      |\n        |      O\n        |     /|\n        |\n        |________\n        ",
+        "\n         ______\n        |      |\n        |      O\n        |     /|\\\n        |\n        |________\n        ",
+        "\n         ______\n        |      |\n        |      O\n        |     /|\\\n        |     / \\\n        |________\n        ",
+        "\n           \\O/\n            |\n           / \\\n          -----\n        Voc\u00EA venceu!\n        "
+    ];
     var frutas = [
         "maca",
         "banana",
@@ -121,6 +128,11 @@ document.addEventListener("DOMContentLoaded", function () {
     var hangman = new HangMan(palavra_aleatoria);
     var erros = hangman.getErros();
     var palavra_escondida = hangman.hide();
+    //primeria exibição
+    /*menssagem.innerHTML = ` Quant. de letras: <strong>${palavra_escondida.length}</strong>
+    <br>
+    ${palavra_escondida.join(" ")}
+    `*/
     btn.addEventListener("click", function (event) {
         event.preventDefault();
         //flag para ver se a letra está na palavra
@@ -139,9 +151,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 esta = true;
             }
         }
-        //console.log("chute:", valor_chute, "Chances:", hangman.getChances());
-        //console.log("Palavra escondida:", palavra_escondida.join(","),"palavra:", palavra_aleatoria);
-        //console.log("condicao; ", palavra_aleatoria === palavra_escondida.join(""))
+        console.log("chute:", valor_chute, "Chances:", hangman.getChances());
+        console.log("Palavra escondida:", palavra_escondida.join(","), "palavra:", palavra_aleatoria);
+        console.log("condicao; ", palavra_aleatoria === palavra_escondida.join(""));
         //diminuindo chances caso tenha errado
         hangman.DiminuirChances(esta, valor_chute);
         //Se errou o chute, a letra errada é armazenada para ser exibida
@@ -150,16 +162,17 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         //Vitoria/derrota/status
         if (venceu === true) {
+            console.log("Entrou na condição mas, não atualizou");
             menssagem.style.color = "white";
             menssagem.innerHTML = "Parab\u00E9ns Acertou a palavra ".concat(palavra_aleatoria, "!!!");
         }
         else if (hangman.getChances() > 0 && venceu === false) {
-            menssagem.style.color = "darkred";
+            menssagem.style.color = "black";
             menssagem.innerHTML =
-                "Erros: ".concat(erros.join(" - "), "\n           <br> \n            Chances: ").concat(hangman.getChances(), "\n           <br> \n            Palavra: ").concat(palavra_escondida.join(" "), " ");
+                "Erros: ".concat(erros.join(" - "), "\n            <br> \n            Chances: ").concat(hangman.getChances(), "\n            <br> \n            Palavra: ").concat(palavra_escondida.join(" "), " ");
         }
         else if (hangman.getChances() <= 0) {
-            menssagem.style.color = "black";
+            menssagem.style.color = "darkred";
             menssagem.innerHTML = "Perdeu, a palavra era ".concat(palavra_aleatoria);
         }
         //Deixando o botão invisivel
@@ -178,7 +191,8 @@ document.addEventListener("DOMContentLoaded", function () {
             btn_reset.style.display = "none";
             venceu = palavra_escondida.join("") === palavra_aleatoria;
             hangman.resetChances(palavra_aleatoria.length); //atibuindo mais chances
-            menssagem.innerHTML = "";
+            menssagem.style.color = "black";
+            menssagem.innerHTML = palavra_escondida.join(" ");
         });
     });
 });
