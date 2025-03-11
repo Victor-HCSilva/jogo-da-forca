@@ -94,7 +94,8 @@ class HangMan {
 document.addEventListener("DOMContentLoaded", () => {
     //Funcoes uteis
     const utils = new Utils()
-    //adicionar
+    
+    //variaveis
     const forcaDesenhos = [
         `
           ______
@@ -157,13 +158,13 @@ document.addEventListener("DOMContentLoaded", () => {
         |----| 
         |
         |
-        |  o-\--C
+        |  o-\\--C
         --------
         PERDEU
         `
     
     ];
-
+    
     let frutas: Array<string> = [
         "maca",
         "banana",
@@ -211,15 +212,18 @@ document.addEventListener("DOMContentLoaded", () => {
     `
 
     //desenho do boneco
-    boneco.innerHTML = forcaDesenhos[0]
+    boneco.innerHTML = forcaDesenhos[1]
 
     btn.addEventListener("click", (event) => {
         event.preventDefault() 
 
         //flag para ver se a letra está na palavra
         let esta = false;
-        //um array de caracteres
+
+        //flag de vitoria
         let venceu = false; 
+
+        //valor digitado
         let valor_chute: string = chute.value.toUpperCase();
 
         //Preenchendo
@@ -229,10 +233,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 esta = true;
             }
         }
+
          //Se escrever a palavra toda e acertar        
         if(utils.equal(valor_chute, palavra_aleatoria) || utils.equal(palavra_escondida.join(""), palavra_aleatoria) ){
             venceu = true;
         }
+
+        //log
         console.log("chute:", valor_chute, "Chances:", hangman.getChances());
         console.log("Palavra escondida:", palavra_escondida.join(","),"palavra:", palavra_aleatoria);
         console.log("condicao; ", palavra_aleatoria === palavra_escondida.join(""))
@@ -245,40 +252,34 @@ document.addEventListener("DOMContentLoaded", () => {
             hangman.addErro(valor_chute);
         }
 
-
         //Vitoria/derrota/status
         if(venceu){
             menssagem.style.color= "white";
             menssagem.innerHTML = `Parabéns Acertou a palavra ${palavra_aleatoria}!!!`;
              boneco.innerHTML = `
-                CHANCES: <strong> ${hangman.getChances()} </strong>
                 ${forcaDesenhos[forcaDesenhos.length - 2]}
                 `
 
-
-
+        //enquanto as chances  > 0 e var. venceu === false
         } else if(hangman.getChances() > 0 &&  venceu === false) {
-            //menssagem.style.color= "black";
-            //
-            if(hangman.getChances() > 1){
-                boneco.innerHTML = `
-                CHANCES: <strong> ${hangman.getChances()} </strong>
-                ${forcaDesenhos[2]}
-                `
+            //imagem normal
+            boneco.innerHTML = 
+            `CHANCES: <strong style="font-size: 3rem;"> ${hangman.getChances()} </strong>
+            ${forcaDesenhos[2]} `
 
-            }
-                      menssagem.innerHTML = 
-                `Erros: <strong> ${erros.join(" - ")} </strong>   
+            //mensagem padrão
+            menssagem.innerHTML = 
+            `Erros: <strong> ${erros.join(" - ")} </strong>   
             <br> 
             Chances: <strong>${hangman.getChances()}</strong>
             <br> 
             Palavra: ${palavra_escondida.join(" ")} `
 
         } else if(hangman.getChances() <= 0){
-            
-            boneco.innerHTML = `
-            ${forcaDesenhos[forcaDesenhos.length - 1]}
-            `
+            //imagem de derrota
+            boneco.innerHTML = 
+            `${forcaDesenhos[forcaDesenhos.length - 1]}`
+
             //menssagem.style.color= "darkred";
             menssagem.innerHTML = `Perdeu, a palavra era ${palavra_aleatoria}`;
         }
@@ -291,7 +292,7 @@ document.addEventListener("DOMContentLoaded", () => {
         //Removendo o valor digitado:
         chute.value="";
 
-        // RESETAR O JOGO
+        //RESETAR O JOGO
         btn_reset.addEventListener("click", () => {
             indice = utils.randomIndice(0, frutas.length - 1);
             palavra_aleatoria = frutas[indice].toUpperCase(); 
@@ -303,7 +304,7 @@ document.addEventListener("DOMContentLoaded", () => {
             hangman.resetChances(palavra_aleatoria.length) //atibuindo mais chances
            // menssagem.style.color = "black";
             menssagem.innerHTML = palavra_escondida.join(" ");         
-            
+            //imagem inicial
             boneco.innerHTML = `
             ${forcaDesenhos[2]}
             ` 

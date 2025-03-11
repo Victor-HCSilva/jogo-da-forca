@@ -79,7 +79,7 @@ var HangMan = /** @class */ (function () {
 document.addEventListener("DOMContentLoaded", function () {
     //Funcoes uteis
     var utils = new Utils();
-    //adicionar
+    //variaveis
     var forcaDesenhos = [
         "\n          ______\n        |      |\n        |\n        |\n        |\n        |________\n        ",
         "\n         ______\n        |      |\n        |      O\n        |\n        |\n        |________\n        ",
@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
         "\n         ______\n        |      |\n        |      O\n        |     /|\\\n        |\n        |________\n        ",
         "\n         ______\n        |      |\n        |      O\n        |     /|\\\n        |     / \\\n        |________\n        ",
         "\n           \\O/\n            |\n           / \\\n          -----\n        Voc\u00EA venceu!\n        ",
-        "\n           \n        |----| \n        |\n        |\n        |  o---C\n        --------\n        PERDEU\n        "
+        "\n           \n        |----| \n        |\n        |\n        |  o-\\--C\n        --------\n        PERDEU\n        "
     ];
     var frutas = [
         "maca",
@@ -131,13 +131,14 @@ document.addEventListener("DOMContentLoaded", function () {
     //primeiras exibições
     menssagem.innerHTML = " Quant. de letras: <strong>".concat(palavra_escondida.length, "</strong>\n    <br>\n    ").concat(palavra_escondida.join(" "), "\n    ");
     //desenho do boneco
-    boneco.innerHTML = forcaDesenhos[0];
+    boneco.innerHTML = forcaDesenhos[1];
     btn.addEventListener("click", function (event) {
         event.preventDefault();
         //flag para ver se a letra está na palavra
         var esta = false;
-        //um array de caracteres
+        //flag de vitoria
         var venceu = false;
+        //valor digitado
         var valor_chute = chute.value.toUpperCase();
         //Preenchendo
         for (var i = 0; i < palavra_aleatoria.length; i++) {
@@ -150,6 +151,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (utils.equal(valor_chute, palavra_aleatoria) || utils.equal(palavra_escondida.join(""), palavra_aleatoria)) {
             venceu = true;
         }
+        //log
         console.log("chute:", valor_chute, "Chances:", hangman.getChances());
         console.log("Palavra escondida:", palavra_escondida.join(","), "palavra:", palavra_aleatoria);
         console.log("condicao; ", palavra_aleatoria === palavra_escondida.join(""));
@@ -163,19 +165,21 @@ document.addEventListener("DOMContentLoaded", function () {
         if (venceu) {
             menssagem.style.color = "white";
             menssagem.innerHTML = "Parab\u00E9ns Acertou a palavra ".concat(palavra_aleatoria, "!!!");
-            boneco.innerHTML = "\n                CHANCES: <strong> ".concat(hangman.getChances(), " </strong>\n                ").concat(forcaDesenhos[forcaDesenhos.length - 2], "\n                ");
+            boneco.innerHTML = "\n                ".concat(forcaDesenhos[forcaDesenhos.length - 2], "\n                ");
+            //enquanto as chances  > 0 e var. venceu === false
         }
         else if (hangman.getChances() > 0 && venceu === false) {
-            //menssagem.style.color= "black";
-            //
-            if (hangman.getChances() > 1) {
-                boneco.innerHTML = "\n                CHANCES: <strong> ".concat(hangman.getChances(), " </strong>\n                ").concat(forcaDesenhos[2], "\n                ");
-            }
+            //imagem normal
+            boneco.innerHTML =
+                "CHANCES: <strong style=\"font-size: 3rem;\"> ".concat(hangman.getChances(), " </strong>\n            ").concat(forcaDesenhos[2], " ");
+            //mensagem padrão
             menssagem.innerHTML =
                 "Erros: <strong> ".concat(erros.join(" - "), " </strong>   \n            <br> \n            Chances: <strong>").concat(hangman.getChances(), "</strong>\n            <br> \n            Palavra: ").concat(palavra_escondida.join(" "), " ");
         }
         else if (hangman.getChances() <= 0) {
-            boneco.innerHTML = "\n            ".concat(forcaDesenhos[forcaDesenhos.length - 1], "\n            ");
+            //imagem de derrota
+            boneco.innerHTML =
+                "".concat(forcaDesenhos[forcaDesenhos.length - 1]);
             //menssagem.style.color= "darkred";
             menssagem.innerHTML = "Perdeu, a palavra era ".concat(palavra_aleatoria);
         }
@@ -185,7 +189,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         //Removendo o valor digitado:
         chute.value = "";
-        // RESETAR O JOGO
+        //RESETAR O JOGO
         btn_reset.addEventListener("click", function () {
             indice = utils.randomIndice(0, frutas.length - 1);
             palavra_aleatoria = frutas[indice].toUpperCase();
@@ -197,6 +201,7 @@ document.addEventListener("DOMContentLoaded", function () {
             hangman.resetChances(palavra_aleatoria.length); //atibuindo mais chances
             // menssagem.style.color = "black";
             menssagem.innerHTML = palavra_escondida.join(" ");
+            //imagem inicial
             boneco.innerHTML = "\n            ".concat(forcaDesenhos[2], "\n            ");
         });
     });
