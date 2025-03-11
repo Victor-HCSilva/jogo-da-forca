@@ -39,15 +39,48 @@
     }  
 
 }
+*{
+    color: white;
+}
+input{
+    text-align: center;
+    color: black;
+}
+body {
+    display: flex;
+}
 
+#boneco {
+    font-size: 3rem;
+}
+
+#div-boneco {    
+    top: 50%;
+    /*border: 2px solid green;*/
+    height: 500px !important;
+    width: 500px !important;
+     top: 40%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+
+}
 
 body{
-    background: url("back.jpg");
+   /* background: url("back.jpg");*/
+    background: black;
     background-size: cover;
-i
+
+.tema-titulo{
+    color: cyan;
+}
+
+#btn_reset, #btn{
+    border-radius: 10px;
+}
 #btn_reset{
+    margin-top:20px;
     display: none;
-    border-radius: 6px;
 }
 #btn, #btn_reset{
     background-color: rgb(0,100,200);
@@ -59,12 +92,12 @@ i
     color: rgb(0,100,200);
 }
 .main{
-    border-radius: 10px ;
+    /*border-radius: 10px ;
     padding: 50px;
-    text-align: center;
-    background-color: rgb(0, 115, 103);
+    background-color: rgb(0, 115, 103);*/
+    text-align: center ;
     top: 50%;
-    left: 50%;
+    left: 70%;
     transform: translate(-50%, -50%);
     position: absolute;
 }
@@ -72,7 +105,7 @@ input{
     border-radius: 6px;
 }
 #menssagem{
-    color: darkred;
+    /*color: darkred ;*/
 }
  .main > a{
     text-decoration: none;
@@ -81,7 +114,13 @@ input{
     background-color: yellowgreen;
     font-size:1.2rem;
     border-radius: 15px;
+    border: 2px solid white;
 }
 .main > a:hover{
-    border: 2px solid white;
+    transition: 1s;
+    background-color: cyan;
    }
+
+h1{
+    margin-top:15px;
+}
