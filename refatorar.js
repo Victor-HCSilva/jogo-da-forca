@@ -129,10 +129,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var erros = hangman.getErros();
     var palavra_escondida = hangman.hide();
     //primeria exibição
-    /*menssagem.innerHTML = ` Quant. de letras: <strong>${palavra_escondida.length}</strong>
-    <br>
-    ${palavra_escondida.join(" ")}
-    `*/
+    menssagem.innerHTML = " Quant. de letras: <strong>".concat(palavra_escondida.length, "</strong>\n    <br>\n    ").concat(palavra_escondida.join(" "), "\n    ");
     btn.addEventListener("click", function (event) {
         event.preventDefault();
         //flag para ver se a letra está na palavra
@@ -162,7 +159,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         //Vitoria/derrota/status
         if (venceu === true) {
-            console.log("Entrou na condição mas, não atualizou");
             menssagem.style.color = "white";
             menssagem.innerHTML = "Parab\u00E9ns Acertou a palavra ".concat(palavra_aleatoria, "!!!");
         }
@@ -179,6 +175,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (venceu === true || hangman.getChances() <= 0) {
             btn_reset.style.display = "inline";
         }
+        console.log("Entrou na condição mas, não atualizou");
         //Removendo o valor digitado:
         chute.value = "";
         // RESETAR O JOGO

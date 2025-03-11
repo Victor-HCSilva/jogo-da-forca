@@ -196,21 +196,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     //primeria exibição
-    /*menssagem.innerHTML = ` Quant. de letras: <strong>${palavra_escondida.length}</strong>
+    menssagem.innerHTML = ` Quant. de letras: <strong>${palavra_escondida.length}</strong>
     <br>
     ${palavra_escondida.join(" ")}
-    `*/
+    `
     btn.addEventListener("click", (event) => {
 
         event.preventDefault() 
 
         //flag para ver se a letra está na palavra
         let esta = false;
-
         //um array de caracteres
         let venceu = palavra_escondida.join("") === palavra_aleatoria;
         let valor_chute: string = chute.value.toUpperCase();
 
+    
         //Se escrever a palavra toda e acertar        
         if(utils.equal(valor_chute, palavra_aleatoria)){
             venceu = true;
@@ -238,7 +238,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         //Vitoria/derrota/status
         if(venceu === true){
-            console.log("Entrou na condição mas, não atualizou")
             menssagem.style.color= "white";
             menssagem.innerHTML = `Parabéns Acertou a palavra ${palavra_aleatoria}!!!`;
 
@@ -261,6 +260,7 @@ document.addEventListener("DOMContentLoaded", () => {
             btn_reset.style.display = "inline";
         }  
 
+        console.log("Entrou na condição mas, não atualizou")
         //Removendo o valor digitado:
         chute.value="";
 
