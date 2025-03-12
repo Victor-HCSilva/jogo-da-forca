@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Jogo da forca</title>
+        <link rel="stylesheet" href="../js/style_temas.css">
+    </head>
+    <style>
+#hangman{
+
+    font-size: 2rem;
+}
+    </style>
+    <body>
+        <main>
+            <div id="div-boneco">
+                <span >
+                    <pre> 
+<code id="boneco"> 
+</code> 
+                    </pre> 
+                </span>
+            </div>
+
+
+            <div class="main">
+
+                <a href="menu.html">Voltar para o menu</a>
+
+                <div class="spans">
+                    <h1>Jogo da forca</h1>
+                    <p>Tema: <span class="tema-titulo">Frutas</span></p>
+                    <br>
+                    <br>
+                    <span id="menssagem"></span>
+                    <br>
+                </div>
+                <form>
+                    <div>
+                        <input id="chute" type="text" placeholder="Tente alguma letra :D">
+                        <br>
+                        <br>
+                        <input type="submit" value="Tentar" id="btn">
+                    </div>
+
+                </form>
+
+                <div class="btn">
+                    <button id="btn_reset">Resetar</button>
+                </div>
+
+
+            </div>
+        </main>
+        <script src="../js/refatorar.js" defer></script>
+
+    </body>
+</html>
+
