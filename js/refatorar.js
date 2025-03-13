@@ -80,117 +80,51 @@ document.addEventListener("DOMContentLoaded", function () {
     //Funcoes uteis
     var utils = new Utils();
     //variaveis
-   var forcaDesenhos = [
-        `
-          ______
-        |      |
-        |
-        |
-        |
-        |________
-        `,
-          `
-         ______
-        |      |
-        |      O
-        |
-        |
-        |________
-        `,
-          `
-         ______
-        |      |
-        |      O
-        |      |
-        |
-        |________
-        `,
-          `
-         ______
-        |      |
-        |      O
-        |     /|
-        |
-        |________
-        `,
-          `
-         ______
-        |      |
-        |      O
-        |     /|\\
-        |
-        |________
-        `,
-          `
-         ______
-        |      |
-        |      O
-        |     /|\\
-        |     / \\
-        |________
-        `,
-          `
-           \\O/
-            |
-           / \\
-          -----
-        Você venceu!
-        `
-        ,
-         `
-           
-        |----| 
-        |
-        |
-        |  o-\\--C
-        --------
-        PERDEU
-        `
-    
+    var forcaDesenhos = [
+        "\n          ______\n        |      |\n        |\n        |\n        |\n        |________\n        ",
+        "\n         ______\n        |      |\n        |      O\n        |\n        |\n        |________\n        ",
+        "\n         ______\n        |      |\n        |      O\n        |      |\n        |\n        |________\n        ",
+        "\n         ______\n        |      |\n        |      O\n        |     /|\n        |\n        |________\n        ",
+        "\n         ______\n        |      |\n        |      O\n        |     /|\\\n        |\n        |________\n        ",
+        "\n         ______\n        |      |\n        |      O\n        |     /|\\\n        |     / \\\n        |________\n        ",
+        "\n           \\O/\n            |\n           / \\\n          -----\n        Voc\u00EA venceu!\n        ",
+        "\n           \n        |----| \n        |\n        |\n        |  o-\\--C\n        --------\n        PERDEU\n        "
     ];
- 
-
-    const lugares = [
-      "Amazonia",
-      "Saara",
-      "Iguacu",
-      "BarreiraDeCoral",
-      "Everest",
-      "AuroraBoreal",
-      "Fiordes",
-      "MachuPicchu",
-      "Pompeia",
-      "EstátuaLiberdade",
-      "MuralhaChina",
-      "ColiseuRoma",
-      "TajMahal",
-      "PiramidesGize",
-      "Stonehenge",
-      "Moais",
-      "Pantanal",
-      "SalarUyuni",
-      "GrandCanyon",
-      "Yellowstone",
-      "Kilauea",
-      "PeritoMoreno",
-      "Copacabana",
-      "TimesSquare",
-      "TorreEiffel",
-      "RioNilo",
-      "LagoBaikal",
-      "SelvaBorneo",
-      "TemplosAngkor",
-      "Veneza",
-      "Dubai",
-      "Tokyo",
-      "Chernobyl",
-      "Kilimanjaro"
+    var frutas = [
+        "maca",
+        "banana",
+        "laranja",
+        "morango",
+        "uva",
+        "manga",
+        "abacaxi",
+        "melancia",
+        "kiwi",
+        "pessego",
+        "amora",
+        "coco",
+        "abacate",
+        "framboesa",
+        "cereja",
+        "goiaba",
+        "graviola",
+        "tangerina",
+        "limao",
+        "maracuja",
+        "ameixa",
+        "melao",
+        "acerola",
+        "caju",
+        "roma",
+        "figo",
+        "damasco",
+        "nectarina",
+        "lichia",
+        "quina",
+        "tamara"
     ];
-
-
-
-    var indice = utils.randomIndice(0, lugares.length - 1);
-    var palavra_aleatoria = lugares[indice].toUpperCase();
+    var indice = utils.randomIndice(0, frutas.length - 1);
+    var palavra_aleatoria = frutas[indice].toUpperCase();
     var hangman = new HangMan(palavra_aleatoria);
     var erros = hangman.getErros();
     var palavra_escondida = hangman.hide();
@@ -257,8 +191,8 @@ document.addEventListener("DOMContentLoaded", function () {
         chute.value = "";
         //RESETAR O JOGO
         btn_reset.addEventListener("click", function () {
-            indice = utils.randomIndice(0, lugares.length - 1);
-            palavra_aleatoria = lugares[indice].toUpperCase();
+            indice = utils.randomIndice(0, frutas.length - 1);
+            palavra_aleatoria = frutas[indice].toUpperCase();
             hangman = new HangMan(palavra_aleatoria);
             erros = hangman.getErros();
             palavra_escondida = hangman.hide();
@@ -272,4 +206,3 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
-

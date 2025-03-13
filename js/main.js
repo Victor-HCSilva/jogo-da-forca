@@ -1,6 +1,3 @@
-///Se for adicionar a mecanica de escolha do  tema é necessario criar um menu com as escolhas
-//possiveis
-//
 var body = document.querySelector("body") || null;
 var palavra = document.querySelector("#palavra") || null;
 var menssagem = document.querySelector("#menssagem") || null;
@@ -89,7 +86,7 @@ document.addEventListener("DOMContentLoaded", function () {
     btn.addEventListener("click", function (event) {
         event.preventDefault();
         var chuteValue = chute.value;
-        var acertou = false; //flag para perder chances
+        var acertou = false; //flag de vitoria
         for (i = 0; i < size; i++) {
             if (palavra_aleatoria.split("")[i].toUpperCase() == chuteValue.toUpperCase()) {
                 palavra_escondida[i] = chuteValue; //.toUpperCase();
