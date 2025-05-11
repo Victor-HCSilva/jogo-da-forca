@@ -1,126 +1,204 @@
-/*@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap');
-
-
-
-
-@media (max-width: 767px) {
-    *{
-       font-size:1rem; 
-        margin :0;
-        font-family: "Comfortaa", sans-serif;
-        font-optical-sizing: auto;
-        font-weight: <weight>;
-        font-style: normal;
-    }  
+/* Estilos Globais e Resets */
+* {
+    margin: 0;
+    padding: 0; /* Adicionado para um reset mais completo */
+    box-sizing: border-box; /* Melhora o controle de padding e border */
+    font-family: "Comfortaa", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400; /* Exemplo: 400 para normal, 700 para bold */
+    font-style: normal;
+    color: white; /* Cor padrão para todo o texto */
 }
-8?
-/*telas medias*/
 
-@media (min-width: 768px) and (max-width: 1024px) {
-    *{
-       font-size:1.4rem; 
-        margin :0;
-        font-family: "Comfortaa", sans-serif;
-        font-optical-sizing: auto;
-        font-weight: <weight>;
-        font-style: normal;
-    }  
+html {
+    font-size: 62.5%; /* Facilita o uso de REM: 1rem = 10px */
+}
 
+body {
+    /* background: url("back.jpg") no-repeat center center fixed; */ /* Exemplo com imagem */
+    background: black;
+    background-size: cover;
+    display: flex; /* Pode ser útil para alinhar itens se necessário, mas .main e #div-boneco são position:absolute */
+    min-height: 100vh; /* Garante que o body ocupe toda a altura da tela */
+    position: relative; /* Importante para o posicionamento absoluto dos filhos */
 }
-@media (min-width: 1025px) {
-    *{
-       
-       font-size:1.4rem; 
-        margin :0;
-        font-family: "Comfortaa", sans-serif;
-        font-optical-sizing: auto;
-        font-weight: <weight>;
-        font-style: normal;
-    }  
 
-}
-*{
-    color: white;
-}
-input{
+input {
     text-align: center;
     color: black;
+    border-radius: 6px;
 }
-body {
-    display: flex;
+
+/* Estilos Base dos Componentes Principais */
+.main {
+    /* border-radius: 10px ; */
+    /* padding: 50px; */
+    /* background-color: rgb(0, 115, 103); */
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%); /* Apenas o transform vertical aqui, o horizontal será ajustado */
+    width: 80%; /* Adicionado para melhor controle em telas menores */
+    max-width: 500px; /* Um limite para não ficar muito largo em telas grandes */
+}
+
+#div-boneco {
+    position: absolute;
+    top: 40%; /* Usando o último valor que você definiu */
+    left: 20%;
+    transform: translate(-50%, -50%);
+    height: 500px; /* Removido !important, ajuste a especificidade se necessário */
+    width: 500px;  /* Removido !important */
+    /* border: 2px solid green; */
 }
 
 #boneco {
     font-size: 3rem;
 }
 
-#div-boneco {    
-    top: 50%;
-    /*border: 2px solid green;*/
-    height: 500px !important;
-    width: 500px !important;
-     top: 40%;
-    left: 20%;
-    transform: translate(-50%, -50%);
-    position: absolute;
-
-}
-
-body{
-   /* background: url("back.jpg");*/
-    background: black;
-    background-size: cover;
-
-.tema-titulo{
+.tema-titulo {
     color: cyan;
 }
 
-#btn_reset, #btn{
+#btn_reset,
+#btn {
     border-radius: 10px;
-}
-#btn_reset{
-    margin-top:20px;
-    display: none;
-}
-#btn, #btn_reset{
-    background-color: rgb(0,100,200);
+    background-color: rgb(0, 100, 200);
     color: white;
+    padding: 10px 15px; /* Adicionado padding para melhor aparência */
+    border: none; /* Removido borda padrão */
+    cursor: pointer; /* Feedback visual */
 }
-#btn:hover, #btn_reset:hover{
+
+#btn_reset {
+    margin-top: 20px;
+    display: none; /* Escondido por padrão */
+}
+
+#btn:hover,
+#btn_reset:hover {
     transition: 0.5s;
     background-color: white;
-    color: rgb(0,100,200);
+    color: rgb(0, 100, 200);
 }
-.main{
-    /*border-radius: 10px ;
-    padding: 50px;
-    background-color: rgb(0, 115, 103);*/
-    text-align: center ;
-    top: 50%;
-    left: 70%;
-    transform: translate(-50%, -50%);
-    position: absolute;
+
+#menssagem {
+    /* color: darkred ; */
+    margin-top: 15px; /* Espaçamento */
 }
-input{
-    border-radius: 6px;
-}
-#menssagem{
-    /*color: darkred ;*/
-}
- .main > a{
+
+.main > a {
     text-decoration: none;
     color: black;
-    padding: 3px;
+    padding: 3px 10px; /* Ajustado padding */
     background-color: yellowgreen;
-    font-size:1.2rem;
+    font-size: 1.2rem;
     border-radius: 15px;
     border: 2px solid white;
+    display: inline-block; /* Para que padding e margin funcionem corretamente */
+    margin-top: 10px; /* Espaçamento */
 }
-.main > a:hover{
+
+.main > a:hover {
     transition: 1s;
     background-color: cyan;
-   }
+}
 
-h1{
-    margin-top:15px;
+h1 {
+    margin-top: 15px;
+    margin-bottom: 20px; /* Espaçamento inferior */
+}
+
+
+/* Media Queries */
+
+/* Celular (Mobile) - Telas Pequenas (até 768px) */
+@media (max-width: 768px) {
+    body {
+        /* background-color: red;  Seu teste, pode remover */
+    }
+
+    .main {
+        left: 50%; /* Centraliza o .main */
+        transform: translate(-50%, -50%); /* Agora o transform X também */
+        width: 90%; /* Ocupa mais da largura da tela */
+    }
+
+    #div-boneco {
+        display: none; /* Esconde o #div-boneco */
+    }
+
+    /* Ajustes de fonte específicos para mobile, se necessário */
+    html {
+        font-size: 1.6rem; /* Exemplo: 1rem = 9px, pode ajustar */
+    }
+    h1 {
+        font-size: 2.4rem; /* Ajusta tamanho do H1 */
+    }
+    input {
+        text-align: center;
+        color: black;
+        border-radius: 6px; /* Você já tem este */
+        border: 1px solid #ccc; /* Adiciona uma borda sutil, se ainda não tiver uma visível */
+        /* --- Novas propriedades para aumentar o tamanho --- */
+        padding: 5px 5px; /* Aumenta o espaço interno: 10px para cima/baixo, 15px para esquerda/direita */
+        font-size: 0.5rem;  /* Aumenta o tamanho do texto dentro do input, o que também influencia o tamanho percebido */
+        /* Opcional: definir uma largura específica */
+        width: 150px;       /* Exemplo: largura fixa */
+    }
+}
+
+/* Telas Médias (Tablets) - (de 769px até 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    html { /* Aplicar a fonte base no html ou body */
+        font-size: 2rem; /* Isso define 1rem = 1.4 * tamanho_base_do_navegador. Cuidado ao misturar com html {font-size: 62.5%} */
+                           /* Se usou html{font-size:62.5%;} antes, então aqui seria algo como 14px, ou seja, 1.4rem */
+                           /* Se o objetivo é aumentar todas as fontes em 1.4x, é melhor ajustar o font-size do html/body */
+    }
+    /* Se o objetivo era aplicar font-size: 1.4rem a todos os elementos,
+       já está sendo feito por * { font-size: 1.4rem; } ou herdado do body.
+       Pode ser mais específico se quiser aumentar apenas alguns elementos. */
+
+    .main {
+        left: 70%; /* Posição para telas médias */
+        transform: translate(-50%, -50%); /* Centraliza baseado no novo left */
+        width: auto; /* Remove a largura de 90% do mobile */
+        max-width: 600px; /* Um limite para tablets */
+    }
+
+    #div-boneco {
+        display: none; /* Mantém o #div-boneco escondido em telas médias, como no seu original */
+                       /* Se quiser que apareça, mude para display: block; */
+        /* Ajustar tamanho e posição do boneco para tablet se ele fosse visível */
+        /* width: 400px; */
+        /* height: 400px; */
+        /* left: 15%; */
+    }
+}
+
+/* Telas Grandes (Desktop) - (acima de 1025px) */
+@media (min-width: 1025px) {
+    html { /* Ajuste de fonte base se necessário */
+        font-size: 1.6rem; /* Exemplo: 1rem = 16px (se o base do navegador for 10px com o 62.5%) */
+                           /* Ou, se o objetivo era 1.4rem literal para os elementos: */
+    }
+    /* * { font-size: 1.4rem; } já estaria no global. */
+    /* Não precisa repetir as regras de font-family, etc., pois já estão no * global. */
+
+    .main {
+        left: 70%; /* Posição para telas grandes */
+        transform: translate(-50%, -50%); /* Centraliza baseado no novo left */
+        width: auto;
+        max-width: 700px; /* Um limite para desktop */
+    }
+
+    #div-boneco {
+        display: block; /* Mostra o #div-boneco em telas grandes */
+        /* Posições e tamanhos originais para desktop */
+        top: 40%;
+        left: 20%;
+        transform: translate(-50%, -50%);
+        height: 500px;
+        width: 500px;
+    }
 }
