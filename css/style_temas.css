@@ -160,7 +160,7 @@ h1 {
        Pode ser mais específico se quiser aumentar apenas alguns elementos. */
 
     .main {
-        left: 70%; /* Posição para telas médias */
+        left: 50%; /* Posição para telas médias */
         transform: translate(-50%, -50%); /* Centraliza baseado no novo left */
         width: auto; /* Remove a largura de 90% do mobile */
         max-width: 600px; /* Um limite para tablets */
@@ -173,6 +173,17 @@ h1 {
         /* width: 400px; */
         /* height: 400px; */
         /* left: 15%; */
+    }
+    input {
+        text-align: center;
+        color: black;
+        border-radius: 6px; /* Você já tem este */
+        border: 1px solid #ccc; /* Adiciona uma borda sutil, se ainda não tiver uma visível */
+        /* --- Novas propriedades para aumentar o tamanho --- */
+        padding: 5px 5px; /* Aumenta o espaço interno: 10px para cima/baixo, 15px para esquerda/direita */
+        font-size: 0.7rem;  /* Aumenta o tamanho do texto dentro do input, o que também influencia o tamanho percebido */
+        /* Opcional: definir uma largura específica */
+        width: 250px;       /* Exemplo: largura fixa */
     }
 }
 
@@ -200,5 +211,16 @@ h1 {
         transform: translate(-50%, -50%);
         height: 500px;
         width: 500px;
+    }
+    input {
+        text-align: center;
+        color: black;
+        border-radius: 6px; /* Você já tem este */
+        border: 1px solid #ccc; /* Adiciona uma borda sutil, se ainda não tiver uma visível */
+        /* --- Novas propriedades para aumentar o tamanho --- */
+        padding: 5px 5px; /* Aumenta o espaço interno: 10px para cima/baixo, 15px para esquerda/direita */
+        font-size: 0.5rem;  /* Aumenta o tamanho do texto dentro do input, o que também influencia o tamanho percebido */
+        /* Opcional: definir uma largura específica */
+        width: 250px;       /* Exemplo: largura fixa */
     }
 }
